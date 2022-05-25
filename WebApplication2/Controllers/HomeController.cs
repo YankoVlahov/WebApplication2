@@ -12,13 +12,9 @@ namespace WebApplication2.Controllers
 {
     public class HomeController : Controller 
     {
-
         private IUserManager _userManager;
-        
-
         public HomeController(IUserManager userManager)
         {
-
             _userManager = userManager;
 
         }
@@ -39,11 +35,11 @@ namespace WebApplication2.Controllers
             return View("Login");
             
         }
-
-        public IActionResult Logout()
+        [HttpGet]
+        public async  Task<IActionResult> Logout()
         {
-            return RedirectToAction("Logout", "Account");
-
+            await _userManager.SignOut(this.HttpContext);
+           return RedirectToAction("Index", "Home");
         }
 
         public IActionResult Register()
@@ -65,7 +61,22 @@ namespace WebApplication2.Controllers
         }
 
 
+        //private async Task Timer()
+        //{
+        //    while (await timer.WaitForNextTickAsync())
+        //    {
 
+        //        Console.WriteLine("tiki tak tiki tak");
+        //        if (Task.CompletedTask.IsCompletedSuccessfully)
+        //        {
+        //            timer.Dispose();
+        //            RedirectToAction("Index","Home");
+        //        }
+        //    }
+            
+        //}
+
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -12,7 +12,9 @@ namespace WebApplication2.Models
 
         public int Id { get; set; }
         public string Name { get; set; } = null!;
-        public int Admin { get; set; }
+
+        public bool Admin { get; set; }
+
         public string Password { get; set; } = null!;
         public DateTime ValidTo { get; set; }
         public DateTime RowIn { get; set; }

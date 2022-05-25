@@ -20,20 +20,21 @@ namespace WebApplication2.Services
             _dbContext = dbContext;
 
         }
-            
+
 
         public async Task SignIn(HttpContext httpContext, UserRequest user, bool isPersistent = false)
         {
-            
-                var identitySqlUser = await _dbContext.IdentitySqlUsers.Where(x => x.Name == user.Name).FirstOrDefaultAsync();
 
-                ClaimsIdentity identity = new ClaimsIdentity(this.GetUserClaims(identitySqlUser), CookieAuthenticationDefaults.AuthenticationScheme);
-                //ClaimsPrincipal principal = new ClaimsPrincipal(identity);
+            var identitySqlUser = await _dbContext.IdentitySqlUsers.Where(x => x.Name == user.Name).FirstOrDefaultAsync();
 
-                //await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-                await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
-            
+            ClaimsIdentity identity = new ClaimsIdentity(this.GetUserClaims(identitySqlUser), CookieAuthenticationDefaults.AuthenticationScheme);
+            //ClaimsPrincipal principal = new ClaimsPrincipal(identity);
+
+            //await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+            await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+
         }
+    
 
         public async Task SignOut(HttpContext httpContext)
         {

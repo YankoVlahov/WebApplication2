@@ -10,19 +10,18 @@ using WebApplication2.Services;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 
-namespace MastersApi.Controllers
+namespace WebApplication2.Controllers
 {
     [Route("[controller]")]
     [ApiController]
     public class AccountController : Controller
     {
         private IUserManager _userManager;
-        // private readonly IAccount accountController;
-        private IUserService _service;
-        public AccountController(IUserManager userManager, IUserService service)
+      //  private IUserService _service;
+        
+        public AccountController(IUserManager userManager)
         {
-            _service = service;
-            //  accountController = account;
+
             _userManager = userManager;
         }
 
@@ -45,18 +44,18 @@ namespace MastersApi.Controllers
             }
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Logout()
-        {
+        //[HttpGet]
+        //public async Task<IActionResult> Logout()
+        //{
 
-            await _userManager.SignOut(this.HttpContext);
+        //    await _userManager.SignOut(this.HttpContext);
 
-            return RedirectToAction("Index", "Home");
+        //    return RedirectToAction("Index", "Home");
 
-        }
+        //}
 
 
-        [HttpPost]
+ /*       [HttpPost]
         public async Task<ActionResult<IdentitySqlUser>> Adduser(UserRequest userRequest)
         {
             if (userRequest.Name == null || userRequest.Password == null)
@@ -66,12 +65,12 @@ namespace MastersApi.Controllers
             }
             else
             {
-                await _service.Adduser(userRequest);
+                await _userManager.Adduser(userRequest);
 
                 return ViewBag("Успешно регистриран потребител");
 
             }
-        }
+        }*/
 
         [HttpGet]
         public async Task<List<IdentitySqlTicket>> GetTickets()
