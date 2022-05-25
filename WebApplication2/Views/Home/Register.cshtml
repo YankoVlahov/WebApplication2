@@ -18,22 +18,22 @@
         <div class="shape"></div>
     </div>
     
-        @{
-        using (Html.BeginForm("GetUser", "Account", FormMethod.Post))
-        {
-            <h3>Login Here</h3>
+    @{
+    using (Html.BeginForm("AddUser", "Account", FormMethod.Post))
+    {
+        <h3>Register new Account</h3>
 
-            <label>Username</label>
-            <input type="text" asp-for="Name" placeholder="Email or Phone">
+        <label>Username</label>
+        <input type="text" asp-for="Name" placeholder="Email">
 
-            <label>Password</label>
-            <input type="password" asp-for="Password" placeholder="Password">
+        <label>Password</label>
+        <input type="password" asp-for="Password" placeholder="Password">
 
        
-           <input type="submit" />
+       <input type="submit" />
        
-        }
-        }
+    }
+    }
 
 </body>
 </html>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 using System.Security.Claims;
@@ -11,6 +12,7 @@ namespace WebApplication2.Services
     {
         private readonly masterthesisContext _dbContext;
         private readonly IHttpContextAccessor _accessor;
+        public List<IdentitySqlTicket> tck { get; set; }
 
         public UserManager(masterthesisContext dbContext, IHttpContextAccessor accessor)
         {
@@ -38,7 +40,7 @@ namespace WebApplication2.Services
             await httpContext.SignOutAsync();
         }
 
-        private IEnumerable<Claim> GetUserClaims(IdentitySqlUser? user)
+        public IEnumerable<Claim> GetUserClaims(IdentitySqlUser? user)
         {
             List<Claim> claims = new List<Claim>();
             claims.Add(new Claim("UserID", user.Id.ToString()));
@@ -46,11 +48,27 @@ namespace WebApplication2.Services
             claims.Add(new Claim("Admin", user.Admin.ToString())); //Not a good idea;
             return claims;
         }
+
+        public async Task<List<IdentitySqlTicket>> GetTickets()
+        {
+            var currentDate = DateOnly.FromDateTime(DateTime.Now);
+             tck = await _dbContext.IdentitySqlTickets.Where(x=> x.FromDate>= currentDate && x.ToDate<= currentDate).ToListAsync();
+            if (tck.Count < 1 || tck ==null)
+            {
+                return null;
+            }
+            else
+            {
+                return tck;
+            }
+
+      }
     }
 
     public interface IUserManager
     {
         Task SignIn(HttpContext httpContext, UserRequest user, bool isPersistent = false);
         Task SignOut(HttpContext httpContext);
+        Task<List<IdentitySqlTicket>> GetTickets();
     }
 }

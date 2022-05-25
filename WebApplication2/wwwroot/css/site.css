@@ -29,7 +29,10 @@ body {
 body {
     background-color: #080710;
 }
-
+h1 {
+    color: aliceblue;
+    text-align: center;
+}
 .background {
     width: 430px;
     height: 520px;

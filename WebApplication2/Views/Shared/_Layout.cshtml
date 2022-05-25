@@ -2,6 +2,7 @@
 @using WebApplication2.Models
 @inject WebApplication2.Models.masterthesisContext userrr
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +12,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApplication2.styles.css" asp-append-version="true" />
-    
+    <link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
 </head>
 <body>
     <header>
@@ -26,7 +27,20 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>                       
+                        </li>     
+                        @if (((ClaimsIdentity) User.Identity).IsAuthenticated == true)
+                        {
+                            <li>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="GetTickets">Check Who Is Here</a>
+                            </li>
+
+                            @if((this.User.Claims.FirstOrDefault(c=>c.Type=="Admin").Value.ToString() !=null))
+                            {
+                                <li>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Register">Register</a>
+                            </li>
+                            }
+                        }
                     </ul>
                     <ul>
                         @if (((ClaimsIdentity) User.Identity).IsAuthenticated == false)
@@ -48,6 +62,8 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+        
+
     </div>
 
     <footer class="border-top footer text-muted">
