@@ -1,0 +1,39 @@
+﻿@model WebApplication2.Models.UserRequest
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Design by foolishdeveloper.com -->
+    <title>Glassmorphism login Form Tutorial in html css</title>
+ 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    
+    @{
+    using (Html.BeginForm("GetUser", "Account", FormMethod.Post))
+    {
+        <h3>Login Here</h3>
+
+        <label>Username</label>
+        <input type="text" asp-for="Name" placeholder="Email or Phone">
+
+        <label>Password</label>
+        <input type="password" asp-for="Password" placeholder="Password">
+
+       
+       <input type="submit" />
+       
+    }
+    }
+
+</body>
+</html>
