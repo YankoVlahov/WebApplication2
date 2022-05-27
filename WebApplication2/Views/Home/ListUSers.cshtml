@@ -2,42 +2,61 @@
 
 <head>
      <!-- Design by foolishdeveloper.com -->
-    <title>Glassmorphism login Form Tutorial in html css</title>
-    @*<link rel="preconnect" href="https://fonts.gstatic.com">*@
-    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">*@
-    @*<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">*@
+
 
     <meta name="viewport" content="width=device-width"/>
     <style type="text/css">
         body {
             font-family: Arial;
             font-size: 10pt;
+            
             /*background-color:aliceblue;            */
-        }
-      label{
-          color:aliceblue;
-      }
+             }
+       .hide{
+            display:none;
+            }
 
+
+        style{
+            background:#000000;
+            color:#F0F8FF;
+        }
+        label{
+            color:aliceblue;
+        }
+        .float-child {
+        padding: 20px;
+        
     </style>
 </head>
 <body>
-  <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label > Select </label>
-                    
-                    <select name="List"  class="form-control" asp-items="@ViewBag.users" > </select>
-                    @*style="background:#F0FFFF; color: black"*@
-                    <input type="submit" />
-                    @*<script>
-                       $('.List').change(function () {
-                        $(this).find('option').css('color', '');
-                        $(this).find('option:selected').css('color', '#ff0000');
-                    }).trigger('change');
-                    </script>*@
 
-            </div>
-        </div>
-   </div>
+
+             <div class="float-container">
+                  <div class="row">
+                        <div class="col-md-5">
+                            <div class="float-child">
+                                <label > Select </label>  
+                                    <select name="List" class="form-control" style="background:#000000; color:#F0F8FF" asp-items="@ViewBag.users" > </select>
+                                    <input type="submit" style="background:#F0F8FF; color:#000000" value="Edit" onclick="onButtonClick()"/> 
+
+                                    <input class="hide" type="text" id="textInput" value="First Name " style="background:#000000; color:#F0F8FF"  />
+                                    <input class="hide" type="text" id="textInput1" value="Second Name " style="background:#000000; color:#F0F8FF"   />
+                                    <input class="hide" type="text" id="textInput2" value="Last Name " style="background:#000000; color:#F0F8FF"  />
+                        
+                                    <script>function onButtonClick(){
+                                          document.getElementById('textInput').className="show",
+                                          document.getElementById('textInput1').className="show",
+                                          document.getElementById('textInput2').className="show";
+                                        }
+                                   </script>
+                            </div>
+                     </div>
+                 </div>      
+                </div>
+
+
+
+
 </body>
 </html>

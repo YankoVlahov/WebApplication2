@@ -37,6 +37,25 @@ namespace WebApplication2.Controllers
             return View("Login");
             
         }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> GetUser([FromForm] UserRequest userRequest)
+        {
+            if (userRequest.Name == null || userRequest.Password == null)
+            {
+                // return NotFound();
+                ViewBag.Name("попълнете всички полета");
+                return null;
+            }
+            else
+            {
+                if (!ModelState.IsValid)
+                    return View("Index");
+                await _userManager.SignIn(this.HttpContext, userRequest);
+                return RedirectToAction("Index", "Home");
+
+            }
+        }
         [HttpGet]
         public async  Task<IActionResult> Logout()
         {
@@ -65,10 +84,12 @@ namespace WebApplication2.Controllers
         public ViewResult ListUSers()
         {
             var users =  _userManager.GetUsers();
+            
             if (users != null)
             {
                 SelectListItem  listItem = new SelectListItem();
                 var items = users.Select(x => new SelectListItem { Text = x.Name });
+                
                  ViewBag.users = items;
                 return View("ListUSers");
             }
