@@ -13,7 +13,7 @@ namespace WebApplication2.Services
         private readonly masterthesisContext _dbContext;
         private readonly IHttpContextAccessor _accessor;
         public List<IdentitySqlTicket> tck { get; set; }
-
+        
         public UserManager(masterthesisContext dbContext, IHttpContextAccessor accessor)
         {
             _accessor = accessor;
@@ -46,9 +46,12 @@ namespace WebApplication2.Services
             List<Claim> claims = new List<Claim>();
             claims.Add(new Claim("UserID", user.Id.ToString()));
             claims.Add(new Claim("Password", user.Name)); //Not a good idea
-            claims.Add(new Claim("Admin", user.Admin.ToString())); //Not a good idea;
+            claims.Add(new Claim("Admin",user.Admin.ToString())); //Not a good idea;
+            
             return claims;
         }
+
+        
 
         public async Task<List<IdentitySqlTicket>> GetTickets()
         {
@@ -64,6 +67,12 @@ namespace WebApplication2.Services
             }
 
       }
+
+        public IEnumerable<IdentitySqlUser> GetUsers()
+        {          
+            var  usr =  _dbContext.IdentitySqlUsers.OrderBy(x=>x.Name);
+            return usr;
+        }
     }
 
     public interface IUserManager
@@ -71,5 +80,6 @@ namespace WebApplication2.Services
         Task SignIn(HttpContext httpContext, UserRequest user, bool isPersistent = false);
         Task SignOut(HttpContext httpContext);
         Task<List<IdentitySqlTicket>> GetTickets();
+        IEnumerable<IdentitySqlUser> GetUsers();
     }
 }

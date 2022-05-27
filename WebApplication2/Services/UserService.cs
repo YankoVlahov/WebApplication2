@@ -19,12 +19,13 @@ namespace WebApplication2.Services
         private readonly IHttpContextAccessor _httpContext;
         private readonly IOptions<JwtSetting> _options;
         private readonly masterthesisContext dbContext;
-
+        
         public UserService(IHttpContextAccessor httpContext, IOptions<JwtSetting> options, masterthesisContext _dbContext)
         {
             _httpContext = httpContext;
             dbContext = _dbContext;
             _options = options;
+            
         }
         public string CreateJwt(UserRequest user)
         {
@@ -77,12 +78,23 @@ namespace WebApplication2.Services
             }
             else
             {
-                string inPass = Cipher.EncryptString(userRequest.Password);
-                var inserdata = new IdentitySqlUser { Name = userRequest.Name, Password = inPass, RowIn = DateTime.Now, RowUp = DateTime.Now, ValidTo = DateTime.MinValue };
-                await dbContext.IdentitySqlUsers.AddAsync(inserdata);
-                await dbContext.SaveChangesAsync();
+                string NewName = userRequest.Name;
+                var checkName =await this.dbContext.IdentitySqlUsers.Where(x => x.Name == NewName).ToListAsync();
+                if (checkName != null)
+                {
+                    return null;
+                }
+                else
+                {
+                    string inPass = Cipher.EncryptString(userRequest.Password);
+                    var inserdata = new IdentitySqlUser { Name = userRequest.Name, Password = inPass, RowIn = DateTime.Now, RowUp = DateTime.Now, ValidTo = DateTime.MinValue };
+                    await dbContext.IdentitySqlUsers.AddAsync(inserdata);
+                    await dbContext.SaveChangesAsync();
+                    return inserdata;
+                }
+                
 
-                return inserdata;
+                
 
             }
         }

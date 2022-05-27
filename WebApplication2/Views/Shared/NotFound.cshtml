@@ -1,4 +1,5 @@
-﻿@model WebApplication2.Models.UserRequest
+﻿@model  WebApplication2.Services.UserManager
+
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 
@@ -7,28 +8,26 @@
 <head>
   <!-- Design by foolishdeveloper.com -->
     <title>Glassmorphism login Form Tutorial in html css</title>
+ 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    
 </head>
 <body>
-
-    
-    @{
-        @using (Html.BeginForm("Adduser","Account", FormMethod.Post))
-        {
-        <h3>Register new Account</h3>
-
-        <label>Username</label>
-        <input type="text" asp-for="Name" placeholder="Email">
-
-        <label>Password</label>
-        <input type="password" asp-for="Password" placeholder="Password">
-
-       <input type="submit" />
-      
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+<h1>КЪМ МОМЕНТА НЯМА ДАННИ!СТРАНИЦАТА ЩЕ СЕ ЗАТВОРИ СЛЕД НЯКОЛКО СЕКУНДИ...</h1>
+<script>
+        function autoRefresh() {
+            window.location.href="Home/Index";
         }
-    }
+        setInterval('autoRefresh()', 10000);
+    </script> 
+
+        
 
 </body>
 </html>

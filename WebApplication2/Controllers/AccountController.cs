@@ -17,11 +17,11 @@ namespace WebApplication2.Controllers
     public class AccountController : Controller
     {
         private IUserManager _userManager;
-      //  private IUserService _service;
+       private IUserService _service;
         
-        public AccountController(IUserManager userManager)
+        public AccountController(IUserManager userManager, IUserService service)
         {
-
+            _service = service;
             _userManager = userManager;
         }
 
@@ -44,42 +44,34 @@ namespace WebApplication2.Controllers
             }
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> Logout()
-        //{
 
-        //    await _userManager.SignOut(this.HttpContext);
-
-        //    return RedirectToAction("Index", "Home");
-
-        //}
-
-
- /*       [HttpPost]
-        public async Task<ActionResult<IdentitySqlUser>> Adduser(UserRequest userRequest)
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> Adduser([FromForm] UserRequest  userRequest)
         {
             if (userRequest.Name == null || userRequest.Password == null)
             {
-                return NotFound(ViewBag.Name("попълнете всички полета"));
-
+                return View("NotFound");
             }
             else
             {
-                await _userManager.Adduser(userRequest);
-
-                return ViewBag("Успешно регистриран потребител");
-
+                if (await _service.Adduser(userRequest) == null)
+                {
+                    return View("ExistData");
+                }
+                else
+                {
+                    return View("Found");
+                }
+                
             }
-        }*/
+        }
 
         [HttpGet]
         public async Task<List<IdentitySqlTicket>> GetTickets()
         {
             return await _userManager.GetTickets();
          
-
-
-
         }
     }
 }

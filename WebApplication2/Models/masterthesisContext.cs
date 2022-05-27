@@ -25,6 +25,10 @@ namespace WebApplication2.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseMySql("server=localhost;user=test;password=FOSJqJc46;database=masterthesis", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.4.13-mariadb"));
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -287,8 +291,6 @@ namespace WebApplication2.Models
                 entity.Property(e => e.Id)
                     .HasColumnType("int(11)")
                     .HasColumnName("id");
-
-                entity.Property(e => e.Admin).HasColumnType("int(1)");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(100)

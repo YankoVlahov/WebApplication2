@@ -7,16 +7,18 @@ using WebApplication2.Controllers;
 using masterLib;
 using WebApplication2.Services;
 using MastersApi.Controllers;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WebApplication2.Controllers
 {
     public class HomeController : Controller 
     {
         private IUserManager _userManager;
+        
         public HomeController(IUserManager userManager)
         {
             _userManager = userManager;
-
+            
         }
 
         public IActionResult Index()
@@ -60,6 +62,24 @@ namespace WebApplication2.Controllers
             }
         }
 
+        public ViewResult ListUSers()
+        {
+            var users =  _userManager.GetUsers();
+            if (users != null)
+            {
+                SelectListItem  listItem = new SelectListItem();
+                var items = users.Select(x => new SelectListItem { Text = x.Name });
+                 ViewBag.users = items;
+                return View("ListUSers");
+            }
+            else
+            {
+                return View("NotFound");
+            }
+            
+        }
+
+        
 
         //private async Task Timer()
         //{
@@ -73,10 +93,10 @@ namespace WebApplication2.Controllers
         //            RedirectToAction("Index","Home");
         //        }
         //    }
-            
+
         //}
 
-        
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

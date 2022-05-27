@@ -32,7 +32,7 @@ builder.Services.AddAuthentication(
     CookieAuthenticationDefaults.AuthenticationScheme
 ).AddCookie();
 builder.Services.AddMvc();
-
+builder.Services.AddControllers();
 builder.Services.AddAuthentication(options => {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 
@@ -61,6 +61,7 @@ builder.Services.AddDbContext<masterthesisContext>(options =>
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<IUserManager, UserManager>();
+builder.Services.AddSingleton<IUserService , UserService>();
 //builder.Services.AddSwaggerGen(c =>
 //{
 //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApplication2", Version = "v2" });
@@ -87,5 +88,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+
+app.MapControllers();
 
 app.Run();

@@ -12,14 +12,17 @@ namespace WebApplication2.Models
 
         public int Id { get; set; }
         public string Name { get; set; } = null!;
-
-        public bool Admin { get; set; }
-
+        public bool? Admin { get; set; }
         public string Password { get; set; } = null!;
         public DateTime ValidTo { get; set; }
         public DateTime RowIn { get; set; }
         public DateTime RowUp { get; set; }
 
         public virtual ICollection<IdentitySqlPersonal> IdentitySqlPersonals { get; set; }
+    }
+
+    public class ListUsers
+    {
+        public IEnumerable<IdentitySqlUser> Users { get; set; }
     }
 }
