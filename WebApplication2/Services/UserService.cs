@@ -27,7 +27,7 @@ namespace WebApplication2.Services
             _options = options;
             
         }
-        public string CreateJwt(UserRequest user)
+        public string CreateJwt(UserRequest user )
         {
             var secret = this._options.Value.Secret;
             var key = Encoding.ASCII.GetBytes(secret);

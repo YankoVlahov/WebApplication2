@@ -56,7 +56,7 @@ namespace WebApplication2.Services
         public async Task<List<IdentitySqlTicket>> GetTickets()
         {
             var currentDate = DateOnly.FromDateTime(DateTime.Now);
-             tck = await _dbContext.IdentitySqlTickets.Where(x=> x.FromDate>= currentDate && x.ToDate<= currentDate).ToListAsync();
+             tck = await _dbContext.IdentitySqlTickets.Where(x=> x.FromDate>= currentDate && x.ToDate<= currentDate &&x.Status==1).ToListAsync();
             if (tck.Count < 1 || tck ==null)
             {
                 return null;
@@ -73,6 +73,24 @@ namespace WebApplication2.Services
             var  usr =  _dbContext.IdentitySqlUsers.OrderBy(x=>x.Name);
             return usr;
         }
+
+        public IEnumerable<IdentitySqlDepartment> GetDeps()
+        {
+            var deps = _dbContext.IdentitySqlDepartments;
+            return deps;
+        }
+
+        public IEnumerable<IdentitySqlClass> GetClass ()
+        {
+            var classes = _dbContext.IdentitySqlClasses;
+            return classes;
+        }
+
+        public IEnumerable<IdentitySqlTicket> GetTicketforRequest()
+        {
+            var tickets = _dbContext.IdentitySqlTickets.Where(x=>x.Status==1);
+            return tickets;
+        }
     }
 
     public interface IUserManager
@@ -81,5 +99,8 @@ namespace WebApplication2.Services
         Task SignOut(HttpContext httpContext);
         Task<List<IdentitySqlTicket>> GetTickets();
         IEnumerable<IdentitySqlUser> GetUsers();
+        IEnumerable<IdentitySqlDepartment> GetDeps();
+        IEnumerable<IdentitySqlClass> GetClass();
+        IEnumerable<IdentitySqlTicket> GetTicketforRequest();
     }
 }

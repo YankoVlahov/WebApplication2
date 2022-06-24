@@ -81,16 +81,40 @@ namespace WebApplication2.Controllers
             }
         }
 
+        public ViewResult Task()
+        {
+            var classes = _userManager.GetClass();
+            if (classes != null)
+            {
+                SelectListItem listItem = new SelectListItem();
+                var items = classes.Select(x => new SelectListItem { Text = x.Name });
+                ViewBag.classes = items;
+
+            }
+            return View();
+        }
+
+        public ViewResult Request()
+        {
+            return View();
+        }
+
         public ViewResult ListUSers()
         {
             var users =  _userManager.GetUsers();
-            
+            var deps = _userManager.GetDeps();
             if (users != null)
             {
                 SelectListItem  listItem = new SelectListItem();
-                var items = users.Select(x => new SelectListItem { Text = x.Name });
-                
+                var items = users.Select(x => new SelectListItem {  Text = x.Name });
                  ViewBag.users = items;
+                if (deps != null)
+                {
+                    SelectListItem listItem1 = new SelectListItem();
+                    var items1 = deps.Select(x => new SelectListItem { Text = x.Name });
+                    ViewBag.deps = items1;
+                }
+
                 return View("ListUSers");
             }
             else
@@ -100,6 +124,18 @@ namespace WebApplication2.Controllers
             
         }
 
+        public ViewResult ListRequest()
+        {
+            var tickets = _userManager.GetTicketforRequest();
+            if (tickets != null)
+            {
+                SelectListItem listItem = new SelectListItem();
+                var items = tickets.Select(x => new SelectListItem { Text = x.Note });
+                ViewBag.tickets = items;
+                
+            }
+            return View();
+        }
         
 
         //private async Task Timer()

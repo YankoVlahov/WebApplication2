@@ -20,9 +20,4 @@ namespace WebApplication2.Models
 
         public virtual ICollection<IdentitySqlPersonal> IdentitySqlPersonals { get; set; }
     }
-
-    public class ListUsers
-    {
-        public IEnumerable<IdentitySqlUser> Users { get; set; }
-    }
 }

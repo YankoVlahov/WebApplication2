@@ -20,8 +20,6 @@ namespace WebApplication2.Models
         public int PositionType { get; set; }
         public string Email { get; set; } = null!;
         public int DepId { get; set; }
-        public TimeOnly WorkTimeFrom { get; set; }
-        public TimeOnly WorkTimeTo { get; set; }
         public DateTime RowIn { get; set; }
         public DateTime RowUpdate { get; set; }
 

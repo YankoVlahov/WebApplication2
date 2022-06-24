@@ -15,7 +15,9 @@
        .hide{
             display:none;
             }
-
+        .hideListBox{
+            display:none;
+        }
 
         style{
             background:#000000;
@@ -25,35 +27,38 @@
             color:aliceblue;
         }
         .float-child {
-        padding: 20px;
+        padding: 20px;}
+       
         
     </style>
 </head>
 <body>
 
 
-             <div class="float-container">
-                  <div class="row">
-                        <div class="col-md-5">
-                            <div class="float-child">
-                                <label > Select </label>  
+           <div class="class="border-form-wrapper"">
+                            <form class="float-child">
+                                <label> Select </label>  
                                     <select name="List" class="form-control" style="background:#000000; color:#F0F8FF" asp-items="@ViewBag.users" > </select>
-                                    <input type="submit" style="background:#F0F8FF; color:#000000" value="Edit" onclick="onButtonClick()"/> 
+                                    <button type="submit" style="background:#F0F8FF; color:#000000">Edit</button> 
 
                                     <input class="hide" type="text" id="textInput" value="First Name " style="background:#000000; color:#F0F8FF"  />
                                     <input class="hide" type="text" id="textInput1" value="Second Name " style="background:#000000; color:#F0F8FF"   />
                                     <input class="hide" type="text" id="textInput2" value="Last Name " style="background:#000000; color:#F0F8FF"  />
+                                    <label hidden="hidden" id="labelHidden">Department</label>
+                                    <select name="List" id="hideListBox" hidden="hidden" class="form-control" style="background:#000000; color:#F0F8FF" asp-items="@ViewBag.deps" > </select>
                         
-                                    <script>function onButtonClick(){
+                                    <script>
+                                        document.querySelector("button[type='submit']").addEventListener('click', function (e) {
+                                            e.preventDefault();
                                           document.getElementById('textInput').className="show",
                                           document.getElementById('textInput1').className="show",
                                           document.getElementById('textInput2').className="show";
-                                        }
+                                          document.getElementById('hideListBox').hidden=false;
+                                           document.getElementById('labelHidden').hidden=false;
+                                        })
+                                       
                                    </script>
-                            </div>
-                     </div>
-                 </div>      
-                </div>
+                            </form>
 
 
 

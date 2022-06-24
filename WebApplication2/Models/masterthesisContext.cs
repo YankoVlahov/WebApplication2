@@ -27,6 +27,7 @@ namespace WebApplication2.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseMySql("server=localhost;user=test;password=FOSJqJc46;database=masterthesis", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.4.13-mariadb"));
             }
         }
@@ -53,14 +54,6 @@ namespace WebApplication2.Models
                 entity.Property(e => e.Delind)
                     .HasPrecision(1)
                     .HasColumnName("delind");
-
-                entity.Property(e => e.MaxForDay)
-                    .HasPrecision(2)
-                    .HasColumnName("maxForDay");
-
-                entity.Property(e => e.MaxForMonth)
-                    .HasPrecision(2)
-                    .HasColumnName("maxForMonth");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(250)
@@ -97,10 +90,6 @@ namespace WebApplication2.Models
                 entity.Property(e => e.Delind)
                     .HasPrecision(1)
                     .HasColumnName("delind");
-
-                entity.Property(e => e.ManagerId)
-                    .HasColumnType("int(11)")
-                    .HasColumnName("manager_id");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(250)
@@ -203,10 +192,6 @@ namespace WebApplication2.Models
                 entity.Property(e => e.Userid)
                     .HasColumnType("int(11)")
                     .HasColumnName("userid");
-
-                entity.Property(e => e.WorkTimeFrom).HasColumnType("time");
-
-                entity.Property(e => e.WorkTimeTo).HasColumnType("time");
 
                 entity.HasOne(d => d.Dep)
                     .WithOne(p => p.IdentitySqlPersonal)

@@ -14,12 +14,7 @@
     @*<link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />*@
 </head>
 <body>
-    <header>
-        <div class="background">
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HR and Tasks </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -33,6 +28,9 @@
                             <li>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="GetTickets">Check Who Is Here</a>
                             </li>
+                            <li>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Task">Add Task</a>
+                            </li>
                            
                             @if((this.User.Claims.FirstOrDefault(c=>c.Type=="Admin").Value).Equals("True")) 
                             @*Console.WriteLine(Convert.ToBoolean(this.User.Claims.FirstOrDefault(c=>c.Type=="Admin").Value));*@
@@ -41,12 +39,12 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Register">Register</a>
                                 
                             </li>
-                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ListUsers">Users</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ListUsers">User/s</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ListRequest">Requests</a></li>
                             }
                         }
                     </ul>
-                    <ul>
-                        @if (((ClaimsIdentity) User.Identity).IsAuthenticated == false)
+                     @if (((ClaimsIdentity) User.Identity).IsAuthenticated == false)
                         {
                            
                           <a class="nav-link text-dark" asp-area="Identity" asp-action="Login">Login</a>                              
@@ -58,13 +56,12 @@
                           <a class="nav-link text-dark" asp-area=""  asp-action="Logout">Logout</a>
                          
                         }
-                    </ul>
-         
 
                 </div>
             </div>
         </nav>
     </header>
+ 
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -74,9 +71,7 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - HR and Tasks  
-        </div>
+        &copy; 2022 - HR and Tasks  
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -8,7 +8,6 @@ namespace WebApplication2.Models
         public int Id { get; set; }
         public int Code { get; set; }
         public string Name { get; set; } = null!;
-        public int ManagerId { get; set; }
         public decimal Delind { get; set; }
         public DateTime RowIn { get; set; }
         public DateTime RowUpdate { get; set; }

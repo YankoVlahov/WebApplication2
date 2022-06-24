@@ -1,0 +1,51 @@
+﻿<html>
+
+<head>
+     <!-- Design by foolishdeveloper.com -->
+
+
+    <meta name="viewport" content="width=device-width"/>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+            
+            /*background-color:aliceblue;            */
+             }
+       .hide{
+            display:none;
+            }
+        .hideListBox{
+            display:none;
+        }
+
+        style{
+            background:#000000;
+            color:#F0F8FF;
+        }
+        label{
+            color:aliceblue;
+        }
+        .float-child {
+        padding: 20px;}
+  @**@
+     
+    </style>
+</head>
+<body>
+    <div class="border-form-wrapper">
+                            <form>
+                                <label > Select Task</label>  
+                   
+                        <select name="List" class="form-control" style="background:#000000; color:#F0F8FF" asp-items="@ViewBag.classes" > </select>
+                        <label > From Date </label>  
+                        <input type="date" style="background:#000000; color:#F0F8FF">
+                        <label > To Date </label>  
+                        <input type="date" style="background:#000000; color:#F0F8FF">
+                        <button type="submit" style="background:#F0F8FF; color:#000000">Confirm</button> 
+                    
+                            </form>
+                     </div>
+
+</body>
+</html>

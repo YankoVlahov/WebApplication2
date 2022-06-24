@@ -21,14 +21,14 @@
         @{
         using (Html.BeginForm("GetUser", "Home", FormMethod.Post))
         {
-            <h3>Login Here</h3>
+            <h3>Login</h3>
 
             <label>Username</label>
-            <input type="text" asp-for="Name" placeholder="Email or Phone">
+            <input type="text" asp-for="Name">
 
             <label>Password</label>
-            <input type="password" asp-for="Password" placeholder="Password">
-            <input type="submit">
+            <input type="password" asp-for="Password">
+            <button type="submit">Login</button>    
             
         }
         }
